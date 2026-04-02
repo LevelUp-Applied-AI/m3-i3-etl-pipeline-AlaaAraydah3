@@ -1,36 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Nvxy3054)
-# ETL Pipeline — Amman Digital Market
-
-## Overview
-
-<!-- What does this pipeline do? -->
-
-## Setup
-
-1. Start PostgreSQL container:
-   ```bash
-   docker run -d --name postgres-m3-int \
-     -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres \
-     -e POSTGRES_DB=amman_market \
-     -p 5432:5432 -v pgdata_m3_int:/var/lib/postgresql/data \
-     postgres:15-alpine
-   ```
-2. Load schema and data:
-   ```bash
-   psql -h localhost -U postgres -d amman_market -f schema.sql
-   psql -h localhost -U postgres -d amman_market -f seed_data.sql
-   ```
-3. Install dependencies: `pip install -r requirements.txt`
-
-## How to Run
-
-```bash
-python etl_pipeline.py
-```
-
-## Output
-
-<!-- What does customer_analytics.csv contain? -->
 customer_id,customer_name,city,total_orders,total_revenue,avg_order_value,top_category
 1.0,Ahmad Al-Masri,Amman,9,1003.5,111.5,Electronics
 2.0,Fatima Al-Husseini,Irbid,8,827.0,103.375,Sports
@@ -117,34 +84,3 @@ customer_id,customer_name,city,total_orders,total_revenue,avg_order_value,top_ca
 98.0,Laith Al-Khalidi,Amman,2,195.0,97.5,Home & Garden
 99.0,Farah Hamaydeh,Irbid,2,231.0,115.5,Clothing
 100.0,Yazan Bani-Mustafa,Zarqa,1,81.0,81.0,Home & Garden
-
-
-## Quality Checks
-
-<!-- What validations are performed and why? -->
-
-- **No null values in `customer_id` or `customer_name`**
-  - Ensures that every record can be uniquely identified and used for analysis.
-
-- **Total revenue must be greater than 0**
-  - Prevents invalid or meaningless financial records.
-
-- **No duplicate `customer_id` values**
-  - Ensures each customer appears only once in the final summary.
-
-- **Total orders must be greater than 0**
-  - Guarantees that each customer has valid transaction activity.
-
-- **Dataset must not be empty**
-  - Prevents silent failures after filtering (e.g., all data removed due to cancelled orders or invalid quantities).
-
-
-
-
----
-
-## License
-
-This repository is provided for educational use only. See [LICENSE](LICENSE) for terms.
-
-You may clone and modify this repository for personal learning and practice, and reference code you wrote here in your professional portfolio. Redistribution outside this course is not permitted.
