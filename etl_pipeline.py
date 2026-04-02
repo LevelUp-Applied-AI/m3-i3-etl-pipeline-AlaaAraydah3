@@ -126,6 +126,13 @@ def main():
     load(summary, engine, "output/customer_analytics.csv")
 
     print("ETL pipeline completed successfully.")
+    print(len(data["customers"]))
+    print("products:", len(data["products"]))
+    print("orders:", len(data["orders"]))
+    print("order_items:", len(data["order_items"]))
+    print("summary rows:", len(summary))
+    print("loaded rows:", len(summary))
+
 
 
 if __name__ == "__main__":
